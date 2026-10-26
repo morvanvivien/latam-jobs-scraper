@@ -65,7 +65,7 @@ Example input:
 }
 ```
 
-## Three ways to use it
+## Four ways to use it
 
 ### 1. Apify console, no code
 
@@ -130,6 +130,20 @@ for item in client.dataset(run.default_dataset_id).iterate_items():
 ```
 
 The complete file is [`examples/run.py`](examples/run.py). Never put your token in the code: read it from the `APIFY_TOKEN` environment variable as above.
+
+### 4. REST API on RapidAPI, one key for all your APIs
+
+If you already use RapidAPI, the same data is available as a plain REST API with monthly plans and a free tier: [latam-jobs-bumeran-zonajobs-laborum on RapidAPI](https://rapidapi.com/VivienMORVAN/api/latam-jobs-bumeran-zonajobs-laborum). No Apify account needed, billing goes through your RapidAPI subscription.
+
+```bash
+curl -X POST "https://latam-jobs-bumeran-zonajobs-laborum.p.rapidapi.com/v2/acts/bibian~latam-jobs-bumeran-scraper/run-sync-get-dataset-items?clean=true" \
+  -H "x-rapidapi-key: <YOUR_RAPIDAPI_KEY>" \
+  -H "x-rapidapi-host: latam-jobs-bumeran-zonajobs-laborum.p.rapidapi.com" \
+  -H "content-type: application/json" \
+  -d '{"countries": ["argentina"], "keywords": "desarrollador", "maxItems": 50}'
+```
+
+The response is the JSON array of postings, with the same fields as above.
 
 ## Pricing
 
